@@ -1,1 +1,9 @@
 127.0.0.1 - - [10/Dec/2020:12:22:39 +0100] "GET / HTTP/1.1" 200 17474
+127.0.0.1 - - [10/Dec/2020:12:54:21 +0100] "GET /api/ HTTP/1.1" 301 232
+127.0.0.1 - - [10/Dec/2020:12:54:21 +0100] "GET /api HTTP/1.1" 404 7463
+127.0.0.1 - - [10/Dec/2020:12:56:53 +0100] "GET /api/user HTTP/1.1" 200 3361
+127.0.0.1 - - [10/Dec/2020:12:59:17 +0100] "GET /api/user/10 HTTP/1.1" 200 341
+127.0.0.1 - - [10/Dec/2020:13:00:07 +0100] "POST /api/user?name=test&first_name=test&email=test@test.com&password=password HTTP/1.1" 200 48
+127.0.0.1 - - [10/Dec/2020:13:00:28 +0100] "GET /api/task HTTP/1.1" 200 6362
+127.0.0.1 - - [10/Dec/2020:13:01:33 +0100] "POST /api/task?name=tache1&description=Lorem%20ipsum%20tres%20coool&status=1&user_id=2 HTTP/1.1" 200 48
+127.0.0.1 - - [10/Dec/2020:13:02:09 +0100] "GET /api/task/1 HTTP/1.1" 200 367
