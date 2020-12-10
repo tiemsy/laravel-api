@@ -18,8 +18,11 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'first_name',
         'email',
         'password',
+        'api_token',
+        'email_verified_at',
     ];
 
     /**
@@ -40,4 +43,26 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Undocumented function
+     *
+     * @param [type] $publishedAt
+     * @return void
+     */
+    public function setEmailVerifiedAtAttribute($emailVerifiedAt)
+    {
+        $emailVerifiedAt = now();
+        $this->attributes['email_verified_at'] = $emailVerifiedAt;
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @return void
+     */
+    public function getDates()
+    {
+        return ['created_at', 'updated_at', 'email_verified_at'];
+    }
 }
