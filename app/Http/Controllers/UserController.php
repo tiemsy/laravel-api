@@ -24,16 +24,6 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
-    public function create()
-    {
-        return view('api.users.add');
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param Request $request
@@ -41,7 +31,6 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-
         if (User::create([
             'name' => $request->name,
             'first_name' => $request->first_name,

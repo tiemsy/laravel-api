@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 //Route::group(['middleware' => 'auth:api'], function() {
-    Route::apiResource('user', App\Http\Controllers\UserController::class, ['only' => ['create', 'store', 'index', 'show', 'update', 'destroy']]);
-    Route::apiResource('task', App\Http\Controllers\TaskController::class, ['only' => ['create', 'store', 'index', 'show', 'update', 'destroy']]);
+    Route::apiResource('user', App\Http\Controllers\UserController::class);
+    Route::apiResource('task', App\Http\Controllers\TaskController::class);
 //});
 
