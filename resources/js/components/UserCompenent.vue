@@ -1,4 +1,4 @@
-<template>
+<template id="user-compenent">
     <div class="container">
         <div class="row mt-5">
             <div class="col-md-12">
@@ -24,7 +24,7 @@
                                 <th>Modify</th>
                             </tr>
 
-                            <tr v-for="user in users" :key="user.id">
+                            <tr v-for="user in users['users']" :key="user.id">
                                 <td>{{ user.id }}</td>
                                 <td>{{ user.first_name }}</td>
                                 <td>{{ user.name }}</td>
@@ -127,7 +127,7 @@ export default {
                 name: '',
                 email: '',
                 password: '',
-                type: '',
+                api_token: '',
 
             })
         }

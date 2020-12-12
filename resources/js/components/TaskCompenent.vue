@@ -1,4 +1,4 @@
-<template>
+<template id="task-compenent">
     <div class="container">
         <div class="row mt-5">
             <div class="col-md-12">
@@ -8,7 +8,7 @@
 
                         <div class="card-tools">
                             <button class="btn btn-success" data-toggle="modal" data-target="#addNew"
-                                    @click="openModalWindow">Add New <i class="fas fa-user-plus fa-fw"></i></button>
+                                    @click="openModalWindow">Add New <i class="fas fa-tasks fa-fw"></i></button>
                         </div>
                     </div>
 
@@ -25,11 +25,17 @@
                                 <th>Modify</th>
                             </tr>
 
-                            <tr v-for="task in tasks" :key="task.id">
+
+                            <tr v-for="task in tasks['tasks']">
                                 <td>{{ task.id }}</td>
                                 <td>{{ task.name }}</td>
-                                <td>{{ task.description }}</td>
-                                <td>{{ task.status }}</td>
+                                <td>{{ task.description | truncate(50, '...') }}</td>
+                                <td v-if="task.status == 0">
+                                    Close
+                                </td>
+                                <td v-else="task.status == 0">
+                                    Open
+                                </td>
                                 <td>{{ task.user_id }}</td>
                                 <td>{{ task.created_at | formatDate }}</td>
 
@@ -88,9 +94,11 @@
                             </div>
 
                             <div class="form-group">
-                                <input v-model="form.status" type="text" name="status" id="status"
-                                       placeholder="Enter status"
-                                       class="form-control" :class="{ 'is-invalid': form.errors.has('status') }">
+
+                                <select v-model="form.status" name="status" id="status" class="form-control" >
+                                    <option value="1">Open</option>
+                                    <option value="0">Close</option>
+                                </select>
                                 <has-error :form="form" field="status"></has-error>
                             </div>
 
@@ -110,9 +118,12 @@
 </template>
 
 <script>
+import UserCompenent from "./UserCompenent";
+
 export default {
     data() {
         return {
+            users : {},
             editMode: false,
             tasks: {},
             form: new Form({
@@ -121,7 +132,6 @@ export default {
                 description: '',
                 status: '',
                 user_id: ''
-
             })
         }
     },
@@ -161,10 +171,10 @@ export default {
 
             axios.get("api/task").then(data => (this.tasks = data.data));
 
+
             //pick data from controller and push it into tasks object
 
         },
-
 
         createTask() {
 
@@ -190,7 +200,7 @@ export default {
                 })
 
 
-            //this.loadTasks();
+            this.loadTasks();
         },
         deleteTask(id) {
             Swal.fire({
@@ -225,6 +235,17 @@ export default {
                 }
 
             })
+        },
+        mounted() {
+
+            try {
+                let getUsers = axios.get('api/user')
+                getUsers.data.forEach(element => this.users.push(element))
+                console.log(this.users);
+            }
+            catch(error) {
+                console.log(error)
+            }
         }
     },
 
