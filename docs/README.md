@@ -15,13 +15,18 @@ Laravel API is a mini API REST with output in json
 
 <h4>types of object</h4>
 - User (id, name, first_name, email, created_at, updated_at)
+  
 - Task (id, name, description, status , user_id , created_at, updated_at)
+  
 - It provides endpoints to retrieve the data of a User and a Task.
 
 <h4>The API is able to handle the list of tasks associated with a user by offering the possibility of</h4>
 - Get this list of tasks
+  
 - Create, modify and delete one or n task (s) associated with a user
+  
 - Get this list of users
+  
 - add / delete / modify a user
 
 ## Installation and Configuration
@@ -34,12 +39,16 @@ Laravel API is a mini API REST with output in json
 
 <h4>Type the following commands</h4>
 - <code>php artisan db:create</code> //Create the database
+  
 - <code>php artisan migrate</code> // Generate tables in database
+  
 - <code>php artisan db:seed</code> // populate users and tasks tables
 
 <h4>Install node and vue</h4>
 - <code>npm install</code>
+  
 - <code>npm install vue</code>
+
 - <code>npm run dev</code> or npm run watch</code>
 
 <h4>Don't forget to put these two lines in your .env</h4>
