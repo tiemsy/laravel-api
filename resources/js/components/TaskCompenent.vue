@@ -8,7 +8,9 @@
 
                         <div class="card-tools">
                             <button class="btn btn-success" data-toggle="modal" data-target="#addNew"
-                                    @click="openModalWindow">Add New <i class="fas fa-tasks fa-fw"></i></button>
+                                    @click="openModalWindow">Add New
+                                <i class="fas fa-tasks fa-fw"></i>
+                            </button>
                         </div>
                     </div>
 
@@ -37,18 +39,17 @@
                                 <td v-else="task.status == 0">
                                     Open
                                 </td>
-                                <td>{{ task.user.name }}</td>
+                                <td v-if="task.user">
+                                    {{ task.user.name }}
+                                </td><td v-else></td>
                                 <td>{{ task.created_at | formatDate }}</td>
-
                                 <td>
                                     <a href="#" data-id="task.id" @click="editModalWindow(task)">
                                         <i class="fa fa-edit blue"></i>
-                                    </a>
-                                    |
+                                    </a> |
                                     <a href="#" @click="deleteTask(task.id)">
                                         <i class="fa fa-trash red"></i>
                                     </a>
-
                                 </td>
                             </tr>
                             </tbody>

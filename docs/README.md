@@ -43,11 +43,11 @@ Laravel API is a mini API REST with output in json
 
 <h4>Type the following commands</h4>
 
-- <code>php artisan db:create</code> //Create the database
+- <code>php artisan db:create</code> - **Create the database**
   
-- <code>php artisan migrate</code> // Generate tables in database
+- <code>php artisan migrate</code> - **Generate tables in database**
   
-- <code>php artisan db:seed</code> // populate users and tasks tables
+- <code>php artisan db:seed</code> - **populate users and tasks tables**
 
 <h4>Install node and vue</h4>
 
@@ -55,8 +55,9 @@ Laravel API is a mini API REST with output in json
   
 - <code>npm install vue</code>
 
-- <code>npm run dev</code> or npm run watch</code>
+- <code>npm run dev</code> or <code>npm run watch</code>
 
 <h4>Don't forget to put these two lines in your .env</h4>
+
 <div>CACHE_DRIVER = file</div>
 SESSION_DRIVER = file
