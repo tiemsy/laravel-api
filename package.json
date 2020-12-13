@@ -24,7 +24,15 @@
         "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {
+        "@ckeditor/ckeditor5-dev-utils": "^23.6.1",
+        "@ckeditor/ckeditor5-dev-webpack-plugin": "^23.6.1",
+        "@ckeditor/ckeditor5-vue": "^2.0.1",
+        "ckeditor": "^4.12.1",
+        "ckeditor5-build-classic": "^1.0.0",
+        "laravel-vue-pagination": "^2.3.1",
         "moment": "^2.29.1",
+        "postcss-loader": "^3.0.0",
+        "raw-loader": "^0.5.1",
         "route": "^0.2.5",
         "routes": "^2.1.0",
         "sweetalert2": "^10.12.4",

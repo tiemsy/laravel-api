@@ -47,7 +47,10 @@
                     </div>
 
                     <div class="card-footer">
-
+                        <pagination :data="users">
+                            <span slot="prev-nav">&lt; Previous</span>
+                            <span slot="next-nav">Next &gt;</span>
+                        </pagination>
                     </div>
                 </div>
 
@@ -127,10 +130,13 @@ export default {
                 name: '',
                 email: '',
                 password: '',
-                api_token: '',
-
-            })
+                api_token: ''
+            }),
         }
+    },
+    mounted() {
+        // Fetch initial results
+        this.loadUsers();
     },
     methods: {
 
@@ -164,14 +170,12 @@ export default {
             $('#addNew').modal('show');
         },
 
-        loadUsers() {
-
-            axios.get("api/user").then(data => (this.users = data.data));
-
-            //pick data from controller and push it into users object
-
+        loadUsers(page = 1) {
+            if (typeof page === 'undefined') {
+                page = 1;
+            }
+            axios.get("api/user?page=" + page).then(response => (this.users = response.data));
         },
-
 
         createUser() {
 
@@ -196,8 +200,7 @@ export default {
                     console.log("Error......")
                 })
 
-
-            //this.loadUsers();
+            this.loadUsers();
         },
         deleteUser(id) {
             Swal.fire({

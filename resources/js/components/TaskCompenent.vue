@@ -29,7 +29,9 @@
                             <tr v-for="task in tasks['tasks']">
                                 <td>{{ task.id }}</td>
                                 <td>{{ task.name }}</td>
-                                <td>{{ task.description | truncate(50, '...') }}</td>
+                                <td>
+                                    {{ task.description | truncate(50, '...') }}
+                                </td>
                                 <td v-if="task.status == 0">
                                     Close
                                 </td>
@@ -55,7 +57,10 @@
                     </div>
 
                     <div class="card-footer">
-
+                        <pagination :data="tasks">
+                            <span slot="prev-nav">&lt; Previous</span>
+                            <span slot="next-nav">Next &gt;</span>
+                        </pagination>
                     </div>
                 </div>
 
@@ -87,9 +92,8 @@
                             </div>
 
                             <div class="form-group">
-                                <input v-model="form.description" type="text" name="description"
-                                       placeholder="Description"
-                                       class="form-control" :class="{ 'is-invalid': form.errors.has('description') }">
+                                <textarea class="form-control" v-model="form.description" name="description" :class="{ 'is-invalid': form.errors.has('description') }" placeholder="Description"></textarea>
+                                
                                 <has-error :form="form" field="description"></has-error>
                             </div>
 
@@ -135,6 +139,20 @@ export default {
             })
         }
     },
+
+current_page: 1,
+    from: 1,
+    last_page: 1,
+    next_page_url: null,
+    per_page: 5,
+    prev_page_url: null,
+    to: 1,
+    total: 0,
+    mounted() {
+        // Fetch initial results
+        this.loadTasks();
+    },
+
     methods: {
 
         editModalWindow(task) {
@@ -167,9 +185,11 @@ export default {
             $('#addNew').modal('show');
         },
 
-        loadTasks() {
-
-            axios.get("api/task").then(data => (this.tasks = data.data));
+        loadTasks(page = 1) {
+            if (typeof page === 'undefined') {
+                page = 1;
+            }
+            axios.get("api/task?page=" + page).then(response => (this.tasks = response.data));
 
 
             //pick data from controller and push it into tasks object
