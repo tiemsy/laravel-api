@@ -134,10 +134,6 @@ export default {
             }),
         }
     },
-    mounted() {
-        // Fetch initial results
-        this.loadUsers();
-    },
     methods: {
 
         editModalWindow(user) {

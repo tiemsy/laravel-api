@@ -16,9 +16,7 @@ class TaskController extends Controller
      */
     public function index()
     {
-        //return Task::orderByDesc('created_at')->get();
-
-        $tasks = Task::orderByDesc('created_at')->get();
+        $tasks = Task::with('user')->orderByDesc('created_at')->get();
         return response([
             'tasks' => resourceTask::collection($tasks),
             'message' => 'Retrieved successfully'], 200);

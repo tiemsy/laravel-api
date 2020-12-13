@@ -25,7 +25,6 @@
                                 <th>Modify</th>
                             </tr>
 
-
                             <tr v-for="task in tasks['tasks']">
                                 <td>{{ task.id }}</td>
                                 <td>{{ task.name }}</td>
@@ -38,7 +37,7 @@
                                 <td v-else="task.status == 0">
                                     Open
                                 </td>
-                                <td>{{ task.user_id }}</td>
+                                <td>{{ task.user.name }}</td>
                                 <td>{{ task.created_at | formatDate }}</td>
 
                                 <td>
@@ -92,18 +91,25 @@
                             </div>
 
                             <div class="form-group">
-                                <textarea class="form-control" v-model="form.description" name="description" :class="{ 'is-invalid': form.errors.has('description') }" placeholder="Description"></textarea>
-                                
+                                <textarea class="form-control" v-model="form.description" name="description"
+                                          :class="{ 'is-invalid': form.errors.has('description') }"
+                                          placeholder="Description"></textarea>
+
                                 <has-error :form="form" field="description"></has-error>
                             </div>
 
                             <div class="form-group">
-
-                                <select v-model="form.status" name="status" id="status" class="form-control" >
+                                <select v-model="form.status" name="status" id="status" class="form-control">
                                     <option value="1">Open</option>
                                     <option value="0">Close</option>
                                 </select>
                                 <has-error :form="form" field="status"></has-error>
+                            </div>
+
+                            <div class="form-group">
+                                <select id="users" name="users" v-model="form.user_id" class="form-control">
+                                    <option v-for="(user, index) in users['users']" :value="user.id">{{ user.name }}</option>
+                                </select>
                             </div>
 
                         </div>
@@ -127,7 +133,7 @@ import UserCompenent from "./UserCompenent";
 export default {
     data() {
         return {
-            users : {},
+            users: {},
             editMode: false,
             tasks: {},
             form: new Form({
@@ -136,11 +142,10 @@ export default {
                 description: '',
                 status: '',
                 user_id: ''
-            })
+            }),
         }
     },
-
-current_page: 1,
+    current_page: 1,
     from: 1,
     last_page: 1,
     next_page_url: null,
@@ -148,13 +153,8 @@ current_page: 1,
     prev_page_url: null,
     to: 1,
     total: 0,
-    mounted() {
-        // Fetch initial results
-        this.loadTasks();
-    },
 
     methods: {
-
         editModalWindow(task) {
             this.form.clear();
             this.editMode = true
@@ -191,14 +191,14 @@ current_page: 1,
             }
             axios.get("api/task?page=" + page).then(response => (this.tasks = response.data));
 
-
             //pick data from controller and push it into tasks object
 
         },
 
         createTask() {
 
-            this.$Progress.start()
+            this.$Progress.start();
+            this.fetchUserList();
 
             this.form.post('api/task')
                 .then(() => {
@@ -220,8 +220,8 @@ current_page: 1,
                 })
 
 
-            this.loadTasks();
         },
+
         deleteTask(id) {
             Swal.fire({
                 title: 'Are you sure?',
@@ -256,17 +256,16 @@ current_page: 1,
 
             })
         },
-        mounted() {
 
-            try {
-                let getUsers = axios.get('api/user')
-                getUsers.data.forEach(element => this.users.push(element))
-                console.log(this.users);
-            }
-            catch(error) {
-                console.log(error)
-            }
-        }
+        fetchUserList() {
+            axios.get("api/user").then(response => (this.users = response.data));
+        },
+
+
+    },
+
+    mounted() {
+        this.fetchUserList();
     },
 
     created() {

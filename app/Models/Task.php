@@ -22,12 +22,10 @@ class Task extends Model
     ];
 
     /**
-     * Undocumented function
-     *
-     * @return void
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function getDates()
+    public function user()
     {
-        return ['created_at', 'updated_at'];
+        return $this->belongsTo(User::class);
     }
 }

@@ -57,12 +57,10 @@ class User extends Authenticatable
     }
 
     /**
-     * Undocumented function
-     *
-     * @return void
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function getDates()
+    public function tasks()
     {
-        return ['created_at', 'updated_at', 'email_verified_at'];
+        return $this->hasMany(Task::class);
     }
 }
