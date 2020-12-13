@@ -87,7 +87,8 @@
                             <div class="form-group">
                                 <input v-model="form.name" type="text" name="name"
                                        placeholder="Name"
-                                       class="form-control" :class="{ 'is-invalid': form.errors.has('name') }">
+                                       class="form-control"
+                                       :class="{ 'is-invalid': form.errors.has('name') }">
                                 <has-error :form="form" field="name"></has-error>
                             </div>
 
@@ -95,12 +96,13 @@
                                 <textarea class="form-control" v-model="form.description" name="description"
                                           :class="{ 'is-invalid': form.errors.has('description') }"
                                           placeholder="Description"></textarea>
-
                                 <has-error :form="form" field="description"></has-error>
                             </div>
 
                             <div class="form-group">
-                                <select v-model="form.status" name="status" id="status" class="form-control">
+                                <select v-model="form.status" name="status" id="status"
+                                        class="form-control"
+                                        :class="{ 'is-invalid': form.errors.has('status') }">
                                     <option value="1">Open</option>
                                     <option value="0">Close</option>
                                 </select>
@@ -109,6 +111,7 @@
 
                             <div class="form-group">
                                 <select id="users" name="users" v-model="form.user_id" class="form-control">
+                                    <option value="" selected>Select a user</option>
                                     <option v-for="(user, index) in users['users']" :value="user.id">{{ user.name }}</option>
                                 </select>
                             </div>
@@ -129,7 +132,6 @@
 </template>
 
 <script>
-import UserCompenent from "./UserCompenent";
 
 export default {
     data() {
@@ -143,7 +145,7 @@ export default {
                 description: '',
                 status: '',
                 user_id: ''
-            }),
+            })
         }
     },
     current_page: 1,
@@ -163,6 +165,7 @@ export default {
             $('#addNew').modal('show');
             this.form.fill(task)
         },
+
         updateTask() {
             this.form.put('api/task/' + this.form.id)
                 .then(() => {
@@ -180,6 +183,7 @@ export default {
                     console.log("Error.....")
                 })
         },
+
         openModalWindow() {
             this.editMode = false
             this.form.reset();
@@ -197,7 +201,6 @@ export default {
         },
 
         createTask() {
-
             this.$Progress.start();
             this.fetchUserList();
 
@@ -216,11 +219,11 @@ export default {
                     $('#addNew').modal('hide');
 
                 })
-                .catch(() => {
-                    console.log("Error......")
+                .catch((e) => {
+                    var attr = document.getElementById("text");
+
+                    console.log(attr)
                 })
-
-
         },
 
         deleteTask(id) {
@@ -243,7 +246,7 @@ export default {
                                 'Task deleted successfully',
                                 'success'
                             )
-                            this.loadTasks();
+                            this.loadTasks(1);
 
                         }).catch(() => {
                         Swal.fire({
@@ -254,15 +257,12 @@ export default {
                         })
                     })
                 }
-
             })
         },
 
         fetchUserList() {
             axios.get("api/user").then(response => (this.users = response.data));
         },
-
-
     },
 
     mounted() {
@@ -270,12 +270,11 @@ export default {
     },
 
     created() {
-        this.loadTasks();
+        this.loadTasks(1);
 
         Fire.$on('AfterCreatedTaskLoadIt', () => { //custom events fire on
-            this.loadTasks();
+            this.loadTasks(1);
         });
-
     }
 }
 </script>

@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserStoreRequest;
+use App\Http\Requests\UserUpdateRequest;
 use App\Http\Resources\User as resourceUser;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -29,13 +32,14 @@ class UserController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request)
+    public function store(UserStoreRequest $request)
     {
         if (User::create([
             'name' => $request->name,
             'first_name' => $request->first_name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'api_token' => Str::random(100)
         ])) {
             return response()->json([
                 'success' => "User has been created with success"
@@ -61,7 +65,7 @@ class UserController extends Controller
      * @param User $user
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, User $user)
+    public function update(UserUpdateRequest $request, User $user)
     {
         if ($user->update([
             'name' => $request->name,

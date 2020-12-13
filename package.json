@@ -21,7 +21,8 @@
         "resolve-url-loader": "^3.1.0",
         "sass": "^1.15.2",
         "sass-loader": "^8.0.0",
-        "vue-template-compiler": "^2.6.12"
+        "vue-template-compiler": "^2.6.12",
+        "vuejs-form": "^1.2.9"
     },
     "dependencies": {
         "@ckeditor/ckeditor5-dev-utils": "^23.6.1",

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TaskStoreRequest;
+use App\Http\Requests\TaskUpdateRequest;
 use App\Http\Resources\Task as resourceTask;
 use App\Models\Task;
 use Illuminate\Http\Request;
@@ -28,11 +30,12 @@ class TaskController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request)
+    public function store(TaskStoreRequest $request)
     {
         if (Task::create($request->all())) {
             return response()->json([
-                'success' => "Task has been created with success"
+                'success' => true,
+                'message' => "Task has been created with success"
             ], 200);
         }
     }
@@ -55,11 +58,12 @@ class TaskController extends Controller
      * @param Task $task
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, Task $task)
+    public function update(TaskUpdateRequest $request, Task $task)
     {
         if ($task->update($request->all())) {
             return response()->json([
-                'success' => "Task has been updated with success"
+                'success' => true,
+                'message' => "Task has been updated with success"
             ], 200);
         }
     }
@@ -75,7 +79,8 @@ class TaskController extends Controller
     {
         if ($task->delete()) {
             return response()->json([
-                'success' => "Task has been delated with success"
+                'success' => true,
+                'message' => "Task has been delated with success"
             ], 200);
         }
 
