@@ -38,6 +38,7 @@ Laravel API is a mini API REST with output in json
 - git clone https://github.com/tiemsy/laravel-api.git
 
 <h4>Install vendor with composer</h4>
+
 - <code>composer install</code>
 
 <h4>Type the following commands</h4>
@@ -49,6 +50,7 @@ Laravel API is a mini API REST with output in json
 - <code>php artisan db:seed</code> // populate users and tasks tables
 
 <h4>Install node and vue</h4>
+
 - <code>npm install</code>
   
 - <code>npm install vue</code>
