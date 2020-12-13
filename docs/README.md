@@ -11,37 +11,37 @@
 
 Laravel API is a mini API REST with output in json
 
-This Api manage :
+<h3>This Api manage</h3>
 
-- 2 types of object
-- ** User (id, name, first_name, email, created_at, updated_at)
-- ** Task (id, name, description, status , user_id , created_at, updated_at)
-- *** It provides endpoints to retrieve the data of a User and a Task.
+<h4>types of object</h4>
+- User (id, name, first_name, email, created_at, updated_at)
+- Task (id, name, description, status , user_id , created_at, updated_at)
+- It provides endpoints to retrieve the data of a User and a Task.
 
-- The API is able to handle the list of tasks associated with a user by offering the possibility of :
-- ** Get this list of tasks
-- ** Create, modify and delete one or n task (s) associated with a user
-- ** Get this list of users
-- ** add / delete / modify a user
+<h4>The API is able to handle the list of tasks associated with a user by offering the possibility of</h4>
+- Get this list of tasks
+- Create, modify and delete one or n task (s) associated with a user
+- Get this list of users
+- add / delete / modify a user
 
 ## Installation and Configuration
 
-- Clown the project in your web root directory
-- ** git clone https://github.com/tiemsy/laravel-api.git
+<h4>Clown the project in your web root directory</h4>
+- git clone https://github.com/tiemsy/laravel-api.git
 
-- Install vendor with composer
-- ** composer install
+<h4>Install vendor with composer</h4>
+- <code>composer install</code>
 
-- Type the following commands :
-- ** php artisan db:create command //Create the database
-- ** php artisan migrate // Generate tables in database
-- ** php artisan db:seed // populate users and tasks tables
-  
-- Install node and vue
-- ** npm install
-- ** npm install vue
-- ** npm run dev or npm run watch
+<h4>Type the following commands</h4>
+- <code>php artisan db:create</code> //Create the database
+- <code>php artisan migrate</code> // Generate tables in database
+- <code>php artisan db:seed</code> // populate users and tasks tables
 
-Don't forget to put these two lines in your .env
-CACHE_DRIVER = file
+<h4>Install node and vue</h4>
+- <code>npm install</code>
+- <code>npm install vue</code>
+- <code>npm run dev</code> or npm run watch</code>
+
+<h4>Don't forget to put these two lines in your .env</h4>
+<div>CACHE_DRIVER = file</div>
 SESSION_DRIVER = file
