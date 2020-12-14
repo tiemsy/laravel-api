@@ -52,8 +52,6 @@ Laravel API is a mini API REST with output in json
 <h4>Install node and vue</h4>
 
 - <code>npm install</code>
-  
-- <code>npm install vue</code>
 
 - <code>npm run dev</code> or <code>npm run watch</code>
 
